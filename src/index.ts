@@ -112,27 +112,35 @@ app.get("/*", (res, req) => {
         switch (req.getUrl()) {
             case "/":
                 file = config.clientLocation + "/index.html";
-                contentType = "text/html";
+                contentType = "text/html; charset=utf-8";
                 break;
             case "/loader.js":
                 file = config.clientLocation + "/loader.js";
-                contentType = "application/javascript";
+                contentType = "application/javascript; charset=utf-8";
                 break;
             case "/input.js":
                 file = config.clientLocation + "/input.js";
-                contentType = "application/javascript";
+                contentType = "application/javascript; charset=utf-8";
                 break;
             case "/dma.js":
                 file = config.clientLocation + "/dma.js";
-                contentType = "application/javascript";
+                contentType = "application/javascript; charset=utf-8";
                 break;
             case "/config.js":
                 file = config.clientLocation + "/config.js";
-                contentType = "application/javascript";
+                contentType = "application/javascript; charset=utf-8";
+                break;
+            case "/title.png":
+                file = config.clientLocation + "/title.jpg";
+                contentType = "image/jpg";
+                break;
+            case "/build_6f59094d60f98fafc14371671d3ff31ef4d75d9e.wasm.wasm":
+                file = config.clientLocation + "/build_6f59094d60f98fafc14371671d3ff31ef4d75d9e.wasm.wasm";
+                contentType = "application/wasm";
                 break;
         }
 
-        res.writeHeader("Content-Type", contentType + "; charset=utf-8");
+        res.writeHeader("Content-Type", contentType);
 
         if (file && fs.existsSync(file)) {
             res.writeStatus("200 OK").end(fs.readFileSync(file));
